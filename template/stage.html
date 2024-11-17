@@ -7,21 +7,24 @@
     <title>Détails du Stage chez Air France</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/resume.min.css" rel="stylesheet">
+    <!-- Ajout des polices depuis Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <!-- Ajout de PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            font-family: 'Open Sans', serif;
+            font-family: 'Open Sans', sans-serif;
             padding-top: 54px;
             color: #868e96;
         }
-
         .navbar {
-            background-color: #BD5D38;
+            background-color: #007bff; /* Couleur identique à la page principale */
         }
-
         .navbar-brand, .nav-link {
             color: #fff;
         }
-
         .navbar-brand:hover, .nav-link:hover {
             color: #f8f9fa;
         }
@@ -29,17 +32,15 @@
             font-weight: bold;
             color: #fff;
         }
-
         .section-title {
-            font-family: 'Saira Extra Condensed', serif;
+            font-family: 'Saira Extra Condensed', sans-serif;
             font-weight: 700;
             font-size: 2rem;
             color: #343a40;
-            border-bottom: 2px solid #BD5D38;
+            border-bottom: 2px solid #bb5830;
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
         }
-
         .section-content {
             background-color: #fff;
             padding: 2rem;
@@ -47,18 +48,71 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
-
         .content-list {
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
-
         .content-list li {
             margin-bottom: 0.5rem;
         }
-
         .container {
             padding-top: 5rem;
+        }
+
+        /* Style pour le conteneur du PDF */
+        #pdf-container {
+            position: relative;
+            width: 100%;
+            height: 600px; /* Vous pouvez ajuster cette hauteur selon vos besoins */
+            background-color: #f8f9fa;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* Style pour les boutons de navigation */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .prev-button {
+            left: 10px;
+        }
+        .next-button {
+            right: 10px;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+            color: #fff;
+            border: none;
+            padding: 5px; /* Réduit la taille des boutons */
+            border-radius: 50%; /* Forme ronde des boutons */
+            width: 70px; /* Taille réduite de la bulle */
+            height: 70px; /* Taille réduite de la bulle */
+            z-index: 10; /* Assure que les boutons sont au-dessus des images */
+        }
+
+        /* Modifications au survol */
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Fond plus foncé au survol */
+            transform: translateY(-50%) scale(1.1); /* Légère augmentation au survol */
         }
 
     </style>
@@ -66,17 +120,20 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#presentation-entreprise">
+    <a class="navbar-brand js-scroll-trigger" href="#presentation">
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../img/af-logo.jpg" alt="">
     </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#presentation-entreprise">Company Presentation</a>
+                <a class="nav-link js-scroll-trigger" href="#presentation">Company Presentation</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#stage-details">Internship details</a>
+                <a class="nav-link js-scroll-trigger" href="#details">Internship details</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="#photo">pictures</a>
@@ -89,47 +146,22 @@
 </nav>
 
 <div class="container">
-    <section id="presentation-entreprise">
-        <img src="../img/airfrance-logo.png" height="57" width="600"/>
-
+    <section id="presentation">
         <div class="section-content">
-            <h2 class="section-title">Présentation de l'Entreprise Air France</h2>
-            <h3>Identification</h3>
-            <ul>
-                <li><strong>Dénomination :</strong> Air France</li>
-                <li><strong>Adresse :</strong> 45, Rue de Paris, 95747 Tremblay-en-France, France</li>
-                <li><strong>Forme juridique :</strong> Société Anonyme (S.A.)</li>
-                <li><strong>Taille :</strong> Grande entreprise</li>
-                <li><strong>Effectif :</strong> Environ 80 000 employés</li>
-                <li><strong>Secteur d’activité :</strong> Transport aérien</li>
-            </ul>
-
-            <h3>Historique</h3>
-            <p>Fondée en 1933, Air France est l'une des plus anciennes compagnies aériennes au monde. Elle a été créée par la fusion de plusieurs compagnies aériennes françaises. En 2004, Air France a fusionné avec KLM Royal Dutch Airlines, formant ainsi le groupe Air France-KLM, l'un des leaders mondiaux dans le secteur du transport aérien. Cette fusion a permis à l'entreprise de renforcer sa position internationale et d'étendre son réseau mondial.</p>
-
-            <h3>RGPD</h3>
-            <p>Air France s'engage à respecter les normes les plus strictes en matière de protection des données personnelles, conformément au RGPD. L'entreprise met en œuvre des politiques rigoureuses pour protéger les informations des passagers, y compris des mesures de sécurité informatique avancées et des procédures transparentes pour le traitement des données.</p>
-
-            <h3>Externalité</h3>
-            <p>Les activités d'Air France ont des externalités variées. D'un côté, l'entreprise favorise la connectivité internationale et soutient l'économie globale en facilitant le transport de passagers et de marchandises. D'un autre côté, les émissions de CO2 associées aux vols et les impacts environnementaux sont des défis majeurs que l'entreprise s'efforce de réduire par des initiatives de durabilité, telles que l'optimisation des routes et l'investissement dans des technologies plus écologiques.</p>
-
-            <h3>RSE (Responsabilité Sociétale des Entreprises)</h3>
-            <p>Air France est fortement engagée dans des actions de responsabilité sociétale, incluant des initiatives pour réduire son empreinte carbone et promouvoir la diversité et l'inclusion. La compagnie investit dans des projets environnementaux, soutient des actions de solidarité internationale et met en place des programmes pour le développement des compétences et le bien-être de ses employés.</p>
-
-            <h3>SWOT</h3>
-            <ul>
-                <li><strong>Forces :</strong> Réputation internationale solide, large réseau de destinations, intégration avec KLM offrant une couverture mondiale.</li>
-                <li><strong>Faiblesses :</strong> Sensibilité aux fluctuations économiques et aux crises du secteur aérien, coûts élevés liés aux opérations.</li>
-                <li><strong>Opportunités :</strong> Croissance des marchés émergents, développement de nouvelles technologies plus écologiques, expansion de l’offre de services.</li>
-                <li><strong>Menaces :</strong> Volatilité des prix du carburant, concurrence accrue des compagnies aériennes à bas coût, préoccupations environnementales croissantes.</li>
-            </ul>
+            <h3 class="section-title">Présentation Air France - Diaporama</h3>
+            <div id="pdf-container">
+                <!-- Boutons de navigation -->
+                <button class="nav-button prev-button" onclick="navigatePDF(-1)">&#10094;</button>
+                <button class="nav-button next-button" onclick="navigatePDF(1)">&#10095;</button>
+                <!-- Le canvas où le PDF sera affiché -->
+                <canvas id="pdf-canvas"></canvas>
+            </div>
         </div>
     </section>
 
-    <section id="stage-details">
+    <section id="details">
         <div class="section-content">
             <h2 class="section-title">Détails du Stage</h2>
-
             <h3>Projets et Réalisations</h3>
             <ul class="content-list">
                 <li><strong>Développement d'un outil d'inventaire :</strong> Création d'un outil pour les équipes techniques d'Air France.</li>
@@ -154,6 +186,12 @@
                 <li>Collaboration en équipe</li>
             </ul>
 
+            <h3>Difficultés Rencontrées</h3>
+            <ul class="content-list">
+                <li><strong>Adaptation aux Normes de Codage :</strong> Se conformer aux normes de codage strictes de l’entreprise a exigé une grande rigueur, notamment dans la documentation et la structuration du code.</li>
+                <li><strong>Apprentissage de Nouveaux Outils :</strong> Maîtriser rapidement SQLAlchemy et Podman a été un défi. Cet apprentissage s’est fait en parallèle avec les autres tâches, ce qui m'a permis d’élargir mes compétences techniques en continu.</li>
+            </ul>
+
             <h3>Évolution du Stage</h3>
             <ul class="content-list">
                 <li><strong>Apprentissage de Python :</strong> Au début du stage, j'ai commencé par me familiariser avec Python, notamment en apprenant à créer des classes et à structurer le code de manière modulaire.</li>
@@ -161,16 +199,95 @@
                 <li><strong>Développement et Collaboration :</strong> Le développement du projet s'est fait principalement sur ma branche dédiée dans GitHub, ce qui a permis un suivi rigoureux de l'évolution du code. Cette approche a facilité la collaboration avec l'équipe, qui pouvait suivre mes progrès et intégrer mes modifications.</li>
                 <li><strong>Réunions et Communication :</strong> Les réunions quotidiennes avec l'équipe étaient essentielles pour présenter mes avancées, poser des questions, et recevoir des conseils. La collaboration avec les membres de l'équipe</li>
             </ul>
+
+            <h3>Conclusion</h3>
+            <p>Ce stage m'a permis de développer des compétences techniques solides dans le domaine du développement logiciel, en particulier dans l'utilisation de Python et de SQLAlchemy. Travailler sur un projet concret m'a appris à gérer des bases de données, à déployer des applications, et à collaborer efficacement avec une équipe en utilisant des outils comme GitHub. L'apprentissage rapide de nouveaux outils et l'adaptation aux normes de codage de l'entreprise ont été des défis importants, mais qui ont largement contribué à mon développement professionnel.</p>
         </div>
     </section>
 
     <section id="photo">
         <h2 class="section-title">Photos</h2>
+        <!-- Carrousel Bootstrap pour les images -->
+        <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../img/activite-des-ventes-France-Capterra-Zoho_Inventory-5.png" class="d-block w-100" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="../img/Network-inventory-management-advanced-configuration-search.png" class="d-block w-100" alt="Image 2">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
-        <img src="../img/activite-des-ventes-France-Capterra-Zoho_Inventory-5.png" height="650" width="1100"/>
-        <img src="../img/Network-inventory-management-advanced-configuration-search.png" height="650" width="1100"/>
+
+
     </section>
 </div>
+
+<script>
+
+
+
+var currentPage = 1;
+var pdfDoc = null;
+var canvas = document.getElementById('pdf-canvas');
+    var ctx = canvas.getContext('2d');
+
+    // Chargement du PDF
+    pdfjsLib.getDocument('../docs/presentationAirFrance.pdf').promise.then(function (pdf) {
+        pdfDoc = pdf;
+        renderPage(currentPage);
+    });
+
+    // Fonction pour rendre une page
+    function renderPage(pageNum) {
+        pdfDoc.getPage(pageNum).then(function (page) {
+            var viewport = page.getViewport({ scale: getScale() });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            page.render({
+                canvasContext: ctx,
+                viewport: viewport
+            });
+        });
+    }
+
+    function getScale() {
+        var container = document.getElementById('pdf-container');
+        var containerWidth = container.offsetWidth;
+        var containerHeight = container.offsetHeight;
+        var scale = Math.min(containerWidth / 600, containerHeight / 800);
+        return scale;
+    }
+
+    function navigatePDF(direction) {
+        if (direction === 1 && currentPage < pdfDoc.numPages) {
+            currentPage++;
+        } else if (direction === -1 && currentPage > 1) {
+            currentPage--;
+        }
+        renderPage(currentPage);
+    }
+
+
+</script>
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/js/resume.min.js"></script>
+
 </body>
 
 </html>
