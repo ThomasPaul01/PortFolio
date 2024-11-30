@@ -25,12 +25,21 @@
         .navbar-brand, .nav-link {
             color: #fff;
         }
+        .navbar-brand img {
+            max-width: 150px; /* Ajustez selon vos besoins */
+            height: auto; /* Maintient les proportions */
+        }
         .navbar-brand:hover, .nav-link:hover {
             color: #f8f9fa;
         }
         .nav-link.active {
             font-weight: bold;
             color: #fff;
+        }
+        .img-profile {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
         }
         .section-title {
             font-family: 'Saira Extra Condensed', sans-serif;
@@ -121,7 +130,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#presentation">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../img/af-logo.jpg" alt="">
+        <img class="img-profile" src="../img/af-logo.jpg" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
