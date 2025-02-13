@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Stage chez Biron Data</title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/resume.min.css" rel="stylesheet">
+    <!-- Ajout des polices depuis Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <!-- Ajout de PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            padding-top: 54px;
+            color: #868e96;
+        }
+        .navbar {
+            background-color: #007bff; /* Couleur identique à la page principale */
+        }
+        .navbar-brand, .nav-link {
+            color: #fff;
+        }
+        .navbar-brand img {
+            max-width: 150px; /* Ajustez selon vos besoins */
+            height: auto; /* Maintient les proportions */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #f8f9fa;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            color: #fff;
+        }
+        .img-profile {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+        }
+        .section-title {
+            font-family: 'Saira Extra Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #343a40;
+            border-bottom: 2px solid #bb5830;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .section-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .content-list {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .content-list li {
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            padding-top: 5rem;
+        }
+
+        /* Style pour le conteneur du PDF */
+        #pdf-container {
+            position: relative;
+            width: 100%;
+            height: 600px; /* Vous pouvez ajuster cette hauteur selon vos besoins */
+            background-color: #f8f9fa;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* Style pour les boutons de navigation */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .prev-button {
+            left: 10px;
+        }
+        .next-button {
+            right: 10px;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+            color: #fff;
+            border: none;
+            padding: 5px; /* Réduit la taille des boutons */
+            border-radius: 50%; /* Forme ronde des boutons */
+            width: 70px; /* Taille réduite de la bulle */
+            height: 70px; /* Taille réduite de la bulle */
+            z-index: 10; /* Assure que les boutons sont au-dessus des images */
+        }
+
+        /* Modifications au survol */
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Fond plus foncé au survol */
+            transform: translateY(-50%) scale(1.1); /* Légère augmentation au survol */
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#presentation">
+        <span class="d-block d-lg-none">Stage Biron Data</span>
+        <span class="d-none d-lg-block"><img class="img-profile" src="../img/biron_logo.jpg" alt=""></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#presentation">Presentation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#details">details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#photo">photos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">Back to home</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section id="presentation">
+
+        <div class="section-content">
+            <h3 class="section-title">Présentation Biron Data - Diaporama</h3>
+            <h4>en cours</h4>
+<!--            <div id="pdf-container">-->
+<!--                &lt;!&ndash; Boutons de navigation &ndash;&gt;-->
+<!--                <button class="nav-button prev-button" onclick="navigatePDF(-1)">&#10094;</button>-->
+<!--                <button class="nav-button next-button" onclick="navigatePDF(1)">&#10095;</button>-->
+<!--                &lt;!&ndash; Le canvas où le PDF sera affiché &ndash;&gt;-->
+<!--                <canvas id="pdf-canvas"></canvas>-->
+<!--            </div>-->
+        </div>
+   </section>
+
+    <section id="details">
+        <div class="section-content">
+            <h2 class="section-title">Détails du Stage</h2>
+
+            <h3>Évolution du Stage</h3>
+            <ul class="content-list">
+                <li><strong>Apprentissage des Langages :</strong> Au début du stage, j'ai consacré du temps à apprendre les bases de TypeScript et de Kotlin, car je n'avais aucune expérience préalable avec ces langages.</li>
+                <li><strong>Interprétation du Code TypeScript :</strong> Après avoir acquis des connaissances de base en TypeScript et en Kotlin, j'ai commencé par interpréter le code TypeScript existant.</li>
+                <li><strong>Création de l'Environnement de Test :</strong> J'ai ensuite créé l'environnement de test sur la branche Kotlin, incluant la connexion à une base de données ClickHouse via des testcontainers.</li>
+                <li><strong>Réalisation de Tests d'Intégration :</strong> J'ai effectué environ 35 tests d'intégration Kotest, totalisant environ 800 lignes de code. L'optimisation de ces tests s'est faite en les lançant tous sur des testcontainers.</li>
+                <li><strong>Réunions Quotidiennes :</strong> Les réunions d'équipe en visioconférence tous les jours étaient essentielles pour présenter mes avancées, poser des questions et recevoir des conseils.</li>
+                <li><strong>Collaboration :</strong> Utilisation de Slack pour collaborer avec l'équipe et de GitHub pour gérer le code avec ma propre branche dédiée.</li>
+                <!-- Ajoutez ici d'autres étapes ou tâches spécifiques -->
+            </ul>
+
+            <h3>Technologies Utilisées</h3>
+            <ul class="content-list">
+                <li>TypeScript</li>
+                <li>Kotlin</li>
+                <li>Kotest</li>
+                <li>Docker</li>
+                <li>ClickHouse</li>
+                <li>Testcontainers</li>
+                <li>Slack</li>
+                <li>GitHub</li>
+                <!-- Ajoutez ici d'autres technologies utilisées -->
+            </ul>
+
+            <h3>Compétences Développées</h3>
+            <ul class="content-list">
+                <li>Développement en Kotlin</li>
+                <li>Écriture de Tests d'Intégration</li>
+                <li>Gestion de Bases de Données</li>
+                <li>Optimisation des Tests</li>
+                <li>Collaboration en Équipe</li>
+                <!-- Ajoutez ici d'autres compétences développées -->
+            </ul>
+
+            <h3>Difficultés Rencontrées</h3>
+            <ul class="content-list">
+                <li><strong>Adaptation aux Nouvelles Technologies :</strong> Passer de TypeScript à Kotlin et apprendre Kotest a été un défi majeur, nécessitant une rapide assimilation des concepts et des outils.</li>
+                <li><strong>Mise en Place de l'Environnement de Test :</strong> La mise en place de l'environnement de test, notamment les testcontainers, a été particulièrement difficile et a nécessité beaucoup d'efforts et de patience.</li>
+            </ul>
+
+            <h3>Conclusion</h3>
+            <p>Ce stage chez Biron Data m'a permis de renforcer mes compétences techniques, en particulier dans le développement avec Kotlin et la mise en place de tests d'intégration avec Kotest. Travailler sur un projet concret m'a appris à m'adapter rapidement à de nouvelles technologies et à développer des solutions efficaces pour des besoins spécifiques. Les réunions quotidiennes en visioconférence et l'utilisation de Slack et GitHub pour la collaboration ont également amélioré mes compétences en communication et en travail d'équipe. Cette expérience a contribué de manière significative à mon développement professionnel.</p>
+        </div>
+    </section>
+
+
+
+    <section id="photo">
+        <h2 class="section-title">Photos</h2>
+        <!-- Carrousel Bootstrap pour les images -->
+        <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="../img/site_biron.png" class="d-block w-100" alt="Image 1">
+                </div>
+                <div class="carousel-item active">
+                    <img src="../img/demoBironData.png" class="d-block w-100" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="../img/equipe_bironData.webp" class="d-block w-100" alt="Image 3">
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+
+    </section>
+</div>
+
+<script>
+
+
+
+var currentPage = 1;
+var pdfDoc = null;
+var canvas = document.getElementById('pdf-canvas');
+    var ctx = canvas.getContext('2d');
+
+    // Chargement du PDF
+    pdfjsLib.getDocument('../docs/presentationAirFrance.pdf').promise.then(function (pdf) {
+        pdfDoc = pdf;
+        renderPage(currentPage);
+    });
+
+    // Fonction pour rendre une page
+    function renderPage(pageNum) {
+        pdfDoc.getPage(pageNum).then(function (page) {
+            var viewport = page.getViewport({ scale: getScale() });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            page.render({
+                canvasContext: ctx,
+                viewport: viewport
+            });
+        });
+    }
+
+    function getScale() {
+        var container = document.getElementById('pdf-container');
+        var containerWidth = container.offsetWidth;
+        var containerHeight = container.offsetHeight;
+        var scale = Math.min(containerWidth / 600, containerHeight / 800);
+        return scale;
+    }
+
+    function navigatePDF(direction) {
+        if (direction === 1 && currentPage < pdfDoc.numPages) {
+            currentPage++;
+        } else if (direction === -1 && currentPage > 1) {
+            currentPage--;
+        }
+        renderPage(currentPage);
+    }
+
+
+</script>
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="../js/resume.min.js"></script>
+
+</body>
+
+</html>
