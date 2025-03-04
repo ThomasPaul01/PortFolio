@@ -160,14 +160,13 @@
 
         <div class="section-content">
             <h3 class="section-title">Présentation Biron Data - Diaporama</h3>
-            <h4>en cours</h4>
-<!--            <div id="pdf-container">-->
-<!--                &lt;!&ndash; Boutons de navigation &ndash;&gt;-->
-<!--                <button class="nav-button prev-button" onclick="navigatePDF(-1)">&#10094;</button>-->
-<!--                <button class="nav-button next-button" onclick="navigatePDF(1)">&#10095;</button>-->
-<!--                &lt;!&ndash; Le canvas où le PDF sera affiché &ndash;&gt;-->
-<!--                <canvas id="pdf-canvas"></canvas>-->
-<!--            </div>-->
+            <div id="pdf-container">
+                <!-- Boutons de navigation -->
+                <button class="nav-button prev-button" onclick="navigatePDF(-1)">&#10094;</button>
+                <button class="nav-button next-button" onclick="navigatePDF(1)">&#10095;</button>
+                <!-- Le canvas où le PDF sera affiché -->
+                <canvas id="pdf-canvas"></canvas>
+            </div>
         </div>
    </section>
 
@@ -261,7 +260,7 @@ var canvas = document.getElementById('pdf-canvas');
     var ctx = canvas.getContext('2d');
 
     // Chargement du PDF
-    pdfjsLib.getDocument('../docs/presentationAirFrance.pdf').promise.then(function (pdf) {
+    pdfjsLib.getDocument('../docs/BironData.pdf').promise.then(function (pdf) {
         pdfDoc = pdf;
         renderPage(currentPage);
     });
