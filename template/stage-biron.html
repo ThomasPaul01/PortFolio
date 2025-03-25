@@ -10,6 +10,8 @@
     <!-- Ajout des polices depuis Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <!-- Ajout de PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -123,6 +125,17 @@
             background-color: rgba(0, 0, 0, 0.8); /* Fond plus foncé au survol */
             transform: translateY(-50%) scale(1.1); /* Légère augmentation au survol */
         }
+        .two-columns {
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+        }
+
+        .two-columns li {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
 
     </style>
 </head>
@@ -186,17 +199,35 @@
             </ul>
 
             <h3>Technologies Utilisées</h3>
-            <ul class="content-list">
-                <li>TypeScript</li>
-                <li>Kotlin</li>
-                <li>Kotest</li>
-                <li>Docker</li>
-                <li>ClickHouse</li>
-                <li>Testcontainers</li>
-                <li>Slack</li>
-                <li>GitHub</li>
-                <!-- Ajoutez ici d'autres technologies utilisées -->
+            <ul class="content-list two-columns">
+
+                <li>
+                    <i class="devicon-typescript-plain"></i> TypeScript
+                </li>
+                <li>
+                    <i class="devicon-kotlin-plain"></i> Kotlin
+                </li>
+                <li>
+                    <i class="devicon-docker-plain"></i> Docker
+                </li>
+                <li>
+                    <i class="devicon-slack-plain"></i> Slack
+                </li>
+                <li>
+                    <i class="devicon-github-original"></i> GitHub
+                </li>
+                <li>
+                    <i class="devicon-kotest-plain"></i> Kotest
+                </li>
+                <li>
+                    <i class="devicon-clickhouse-plain"></i> ClickHouse
+                </li>
+                <li>
+                    <i class="devicon-testcontainers-plain"></i> Testcontainers
+                </li>
             </ul>
+
+
 
             <h3>Compétences Développées</h3>
             <ul class="content-list">
