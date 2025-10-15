@@ -22,6 +22,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/resume.min.css" rel="stylesheet">
+  <!-- Animations CSS -->
+  <link href="css/animations.css" rel="stylesheet">
 
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
@@ -33,7 +35,7 @@
       <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <span class="d-block d-lg-none">Thomas Paul</span>
         <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/image-profil.jpg" alt="" width="150" height="500">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2 anim-hidden scale-up" src="img/image-profil.jpg" alt="photo Thomas Paul" width="150" height="500" data-delay="40">
         </span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,10 +69,10 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
         <div class="my-auto">
-          <h1 class="mb-0">Thomas
+          <h1 class="mb-0 anim-hidden fade-up">Thomas
             <span class="text-primary">Paul</span>
           </h1>
-          <div class="subheading mb-5"> Tel: 06-50-15-81-62 · @:
+          <div class="subheading mb-5 anim-hidden slide-in-left"> Tel: 06-50-15-81-62 · @:
             <a href="mailto:thomas.paul7794@gmail.com">thomas.paul7794@gmail.com</a>
           </div>
 
@@ -84,7 +86,7 @@
               <a href="https://linkedin.com/in/thomas-paul-00b58b29a">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  <i class="fa fa-linkedin fa-stack-1x fa-inverse icon-bounce anim-hidden" data-delay="120"></i>
                 </span>
               </a>
             </li>
@@ -92,7 +94,7 @@
               <a href="https://github.com/ThomasPaul01">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse icon-bounce anim-hidden" data-delay="220"></i>
                 </span>
               </a>
             </li>
@@ -105,12 +107,12 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
         <div class="my-auto">
-          <h2 class="mb-5">Education 🎓</h2>
+          <h2 class="mb-5 anim-hidden fade-up">Education 🎓</h2>
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
-              <h3 class="mb-0">Bachelor Développeur web et application</h3>
-              <div class="subheading mb-3">Efrei - Actuellement en 3eme année </div>
+                <h3 class="mb-0">Bachelor Développeur web et application</h3>
+                <div class="subheading mb-3"><img src="img/efrei_logo.jpg" alt="Efrei" class="edu-logo">Efrei, VilleJuif - Actuellement en 3eme année</div>
               <p></p>
             </div>
             <div class="resume-date text-md-right">
@@ -121,7 +123,7 @@
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
               <h3 class="mb-0">BTS Services Informatiques aux Organisations - Option SLAM</h3>
-              <div class="subheading mb-3">ORT Montreuil Daniel Mayer</div>
+                <div class="subheading mb-3"><img src="img/ort_daniel_mayer_93_montreuil_logo-removebg-preview.png" alt="ORT Daniel Mayer" class="edu-logo">ORT Daniel Mayer, Montreuil</div>
             </div>
             <div class="resume-date text-md-right">
               <span class="text-primary">2023 - 2025</span>
@@ -130,9 +132,9 @@
 
           <div class="resume-item d-flex flex-column flex-md-row">
             <div class="resume-content mr-auto">
-              <h3 class="mb-0">Baccalauréat Général</h3>
-              <div class="subheading mb-3">Lycée Jean Vilar, Meaux</div>
-              <p>Spécialités Mathématiques, Physique, SVT</p>
+              <h3 class="mb-0">Baccalauréat Général Spécialités Mathématiques, Physique, SVT</h3>
+                <div class="subheading mb-3"><img src="img/lyceeJeanVilarLogo.png" alt="Lycée Jean Vilar" class="edu-logo">Lycée Jean Vilar, Meaux</div>
+              <p></p>
             </div>
             <div class="resume-date text-md-right">
               <span class="text-primary">2019 - 2023</span>
@@ -145,7 +147,7 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
         <div class="my-auto">
-          <h2 class="mb-5">Skills 🤺</h2>
+          <h2 class="mb-5 anim-hidden fade-up">Skills 🤺</h2>
 
           <!-- Langages de Programmation -->
           <div class="subheading mb-3">Programming Languages</div>
@@ -238,7 +240,7 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
         <div class="my-auto">
-          <h2 class="mb-5">Experience Profesionnel 👨‍💻</h2>
+          <h2 class="mb-5 anim-hidden fade-up">Experience Profesionnel 👨‍💻</h2>
 
           <!-- Stage en Développement Web -->
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -299,7 +301,7 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="projet">
         <div class="my-auto">
-          <h2 class="mb-5">Project 🛠️</h2>
+          <h2 class="mb-5 anim-hidden fade-up">Project 🛠️</h2>
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
               <div class="subheading mb-3"><img src="img/logoVeliko.png" height="110" width="300" alt="logoVeliko"/></div>
@@ -312,7 +314,7 @@
               <a href="template/veliko.html" class="btn btn-primary">En savoir plus</a>
             </div>
             <div class="resume-date text-md-right">
-              <span class="text-primary">16/09/2024 - en cours</span>
+              <span class="text-primary">16/09/2024 - 09/03/2025</span>
             </div>
           </div>
         </div>
@@ -322,7 +324,7 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cv">
         <div class="my-auto">
-          <h2 class="mb-5">CV &amp; Tableau Compétence</h2>
+          <h2 class="mb-5 anim-hidden fade-up">CV</h2>
           <ul class="fa-ul mb-0">
             <li>
               <i class="fa-li fa fa-file-pdf-o"></i>
@@ -346,6 +348,7 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
+  <script src="js/animations.js"></script>
 
   </body>
 

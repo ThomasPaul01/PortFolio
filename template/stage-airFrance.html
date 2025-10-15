@@ -7,6 +7,7 @@
     <title>Détails du Stage chez Air France</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/resume.min.css" rel="stylesheet">
+    <link href="../css/animations.css" rel="stylesheet">
     <link href="../vendor/devicons/css/devicons.min.css" rel="stylesheet">
     <!-- Ajout des polices depuis Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -133,7 +134,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#presentation">
         <span class="d-block d-lg-none">Stage Air France</span>
-        <span class="d-none d-lg-block"><img class="img-profile" src="../img/af-logo.jpg" alt=""></span>
+    <span class="d-none d-lg-block"><img class="img-profile anim-hidden scale-up" src="../img/af-logo.jpg" alt="" data-delay="40"></span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -159,9 +160,16 @@
 
 <div class="container">
     <section id="presentation">
-        <div class="section-content">
-            <h3 class="section-title">Présentation Air France - Diaporama</h3>
+            <div class="section-content">
+            <h3 class="section-title anim-hidden fade-up">Présentation Air France - Diaporama</h3>
             <div id="pdf-container">
+                <div id="pdf-loader" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.85);z-index:5;">
+                    <div style="text-align:center;">
+                        <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+                        <div style="margin-top:.5rem">Chargement du document…</div>
+                    </div>
+                </div>
+                <div id="pdf-error" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.95);z-index:6;color:#c00;padding:1rem;text-align:center;"></div>
                 <!-- Boutons de navigation -->
                 <button class="nav-button prev-button" onclick="navigatePDF(-1)">&#10094;</button>
                 <button class="nav-button next-button" onclick="navigatePDF(1)">&#10095;</button>
@@ -228,27 +236,6 @@
             <p>Ce stage m'a permis de développer des compétences techniques solides dans le domaine du développement logiciel, en particulier dans l'utilisation de Python et de SQLAlchemy. Travailler sur un projet concret m'a appris à gérer des bases de données, à déployer des applications, et à collaborer efficacement avec une équipe en utilisant des outils comme GitHub. L'apprentissage rapide de nouveaux outils et l'adaptation aux normes de codage de l'entreprise ont été des défis importants, mais qui ont largement contribué à mon développement professionnel.</p>
         </div>
     </section>
-
-    <section id="photo">
-        <h2 class="section-title">Photos</h2>
-        <!-- Carrousel Bootstrap pour les images -->
-        <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="../img/activite-des-ventes-France-Capterra-Zoho_Inventory-5.png" class="d-block w-100" alt="Image 1">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-
-
-    </section>
 </div>
 
 <script>
@@ -260,11 +247,40 @@ var pdfDoc = null;
 var canvas = document.getElementById('pdf-canvas');
     var ctx = canvas.getContext('2d');
 
-    // Chargement du PDF
-    pdfjsLib.getDocument('../docs/presentationAirFrance.pdf').promise.then(function (pdf) {
-        pdfDoc = pdf;
-        renderPage(currentPage);
-    });
+    // Chargement du PDF avec gestion du worker et UI de chargement/erreur
+    function showPdfLoader(show){
+        var l = document.getElementById('pdf-loader');
+        if(l) l.style.display = show ? 'flex' : 'none';
+    }
+    function showPdfError(msg, pdfPath){
+        var e = document.getElementById('pdf-error');
+        if(e){ 
+            e.style.display='flex'; 
+            var html = '<div><strong>' + msg + '</strong><br/>';
+            if(pdfPath){
+                html += '<a href="' + pdfPath + '" download style="color:#007bff;">Télécharger le PDF</a>';
+            }
+            html += '</div>';
+            e.innerHTML = html;
+        }
+    }
+
+    if(typeof pdfjsLib === 'undefined'){
+        showPdfLoader(false);
+        showPdfError('La librairie PDF.js est introuvable. Vérifiez la connexion ou le CDN.');
+    } else {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.worker.min.js';
+        showPdfLoader(true);
+        pdfjsLib.getDocument('../docs/presentationAirFrance.pdf').promise.then(function (pdf) {
+            pdfDoc = pdf;
+            showPdfLoader(false);
+            renderPage(currentPage);
+        }).catch(function(err){
+            showPdfLoader(false);
+            showPdfError('Erreur lors du chargement du document PDF : ' + (err && err.message ? err.message : err), '../docs/presentationAirFrance.pdf');
+            console.error('PDF load error', err);
+        });
+    }
 
     // Fonction pour rendre une page
     function renderPage(pageNum) {
@@ -308,6 +324,7 @@ var canvas = document.getElementById('pdf-canvas');
 
 <!-- Custom scripts for this template -->
 <script src="../js/resume.min.js"></script>
+<script src="../js/animations.js"></script>
 
 </body>
 

@@ -1,0 +1,148 @@
+/* Animations utilities for the resume project */
+
+:root{
+  --anim-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+/* Initial state for animated elements */
+.anim-hidden{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms var(--anim-ease), transform 600ms var(--anim-ease);
+}
+
+/* When element becomes visible */
+.anim-in-view{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variants */
+.fade-up{
+  opacity: 0;
+  transform: translateY(18px);
+}
+.fade-up.anim-in-view{
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms var(--anim-ease), transform 600ms var(--anim-ease);
+}
+
+.slide-in-left{
+  opacity: 0;
+  transform: translateX(-24px);
+}
+.slide-in-left.anim-in-view{
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 650ms var(--anim-ease), transform 650ms var(--anim-ease);
+}
+
+.scale-up{
+  opacity: 0;
+  transform: scale(.96);
+}
+.scale-up.anim-in-view{
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 500ms var(--anim-ease), transform 500ms var(--anim-ease);
+}
+
+/* A subtle bounce used for icons */
+@keyframes bounceTiny{
+  0%{transform: translateY(0)}
+  30%{transform: translateY(-6px)}
+  60%{transform: translateY(0)}
+  100%{transform: translateY(0)}
+}
+.icon-bounce.anim-in-view{
+  animation: bounceTiny 900ms var(--anim-ease);
+}
+
+/* Profile image hover subtle effect */
+.img-profile{
+  transition: transform 300ms var(--anim-ease), box-shadow 300ms var(--anim-ease);
+}
+.img-profile:hover{
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* Stagger helper using CSS variable --delay */
+.anim-stagger{
+  transition-delay: var(--delay, 0ms);
+}
+
+/* Respect user preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim-hidden, .anim-in-view, .img-profile, .icon-bounce, .fade-up, .slide-in-left, .scale-up {
+    transition: none !important;
+
+/* Vertical timeline / tree on the left showing continuity for resume items */
+.resume-section.timeline{ position: relative; }
+.resume-section.timeline::before{
+  content: '';
+  position: absolute;
+  left: 48px; /* position the vertical line relative to the section */
+  top: 18px;
+  bottom: 18px;
+  width: 4px;
+  background: rgba(189,93,56,0.95); /* match the site's accent */
+  border-radius: 4px;
+}
+.resume-section.timeline .resume-item{ position: relative; padding-left: 98px; }
+.resume-section.timeline .resume-item::before{
+  content: '';
+  position: absolute;
+  left: 40px; /* center the marker on the vertical line */
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid #BD5D38;
+  box-shadow: 0 0 0 6px rgba(189,93,56,0.06);
+  transform: translateY(0);
+}
+
+/* make markers align better for multi-line items (approx) */
+.resume-section.timeline .resume-item .resume-content h3{ margin-top:0; }
+
+@media (max-width: 768px){
+  .resume-section.timeline::before{ left: 28px; }
+  .resume-section.timeline .resume-item{ padding-left: 72px; }
+  .resume-section.timeline .resume-item::before{ left: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .resume-section.timeline::before, .resume-section.timeline .resume-item::before{ transition: none; }
+}
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Small safeguard for profile images used with different sizes */
+.img-profile[width][height] {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Loader small styles used by PDF viewer */
+#pdf-loader .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+#pdf-error { font-size: 1rem; }
+
+/* Education logos next to school names */
+.edu-logo{
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 0.6rem;
+  border-radius: 6px;
+  background: transparent;
+}
